@@ -10,7 +10,7 @@ table {
 th, td {
     text-align: center;
     border: 1px solid #000000;
-    padding: 8px;
+    padding: 5px;
     }
 
 th {
@@ -28,8 +28,10 @@ body, html {
 
 /*-------------------------- Body elements --------------------------*/
 h1 {
+	position: absolute;
 	font-size: 2.197rem;
 	padding-left: 2rem;
+	top: 1rem;
 }
 
 h2 {
@@ -37,13 +39,9 @@ h2 {
 }
 
 .paragraph {
-	padding-left: 5rem;
-}
-
-#bt-get {
 	position: absolute;
-	top:  5.5rem;
-	left: 22rem;
+	padding-left: 5rem;
+	top: 5.5rem;
 }
 
 #subt-author {
@@ -60,7 +58,7 @@ h2 {
 
 #subt-total {
 	position: absolute;
-	top: 36rem;
+	top: 44rem;
 	padding-left: 5rem;
 }
 
@@ -68,4 +66,17 @@ h2 {
 	position: absolute;
 	top: 11rem;
 	left: 45rem;
+}
+
+#cv-forBp {
+	border: 1px solid #FF00A6;
+	position: absolute;
+	top: 14.5rem;
+	left: 45rem;
+}
+
+#bt-get {
+	position: absolute;
+	top:  5.5rem;
+	left: 22rem;
 }

@@ -94,12 +94,20 @@ var apimock = (function () {
             callback(mockdata[author]);
         },
 
-        getBlueprintsByNameAndAuthor: function(name, author, callback) {
-            blueprint = mockdata[author].find(function(blueprint) {
-                return blueprint.name == name
-            });
-            callback(null, blueprint)
+        getBlueprintsByNameAndAuthor: function(author, name, callback) {
+            console.log("    getBlueprintsByNameAndAuthor(): Entra (callback).");
+            var blueprint;
+            mockdata[author].forEach(
+                function(bp) {
+                    if (bp.name == name) {
+                        console.log("      blueprint.name: "+bp.name);
+                        blueprint = bp;
+                    }
+                }
+            );
+            console.log("    BP: "+blueprint.name);
+            console.log("    getBlueprintsByNameAndAuthor(): Justo antes del callback.");
+            callback(blueprint);
         }
-    }
-
+    };
 })();
