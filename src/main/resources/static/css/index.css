@@ -1,0 +1,71 @@
+* {
+    font-family: arial, sans-serif;
+    }
+
+table {
+    border-collapse: collapse;
+    width:  100%;
+    }
+
+th, td {
+    text-align: center;
+    border: 1px solid #000000;
+    padding: 8px;
+    }
+
+th {
+    font-weight: bold;
+    background-color: lightgrey;
+    }
+
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    }
+
+/*-------------------------- Body elements --------------------------*/
+h1 {
+	font-size: 2.197rem;
+	padding-left: 2rem;
+}
+
+h2 {
+	font-size: 1.69rem;
+}
+
+.paragraph {
+	padding-left: 5rem;
+}
+
+#bt-get {
+	position: absolute;
+	top:  5.5rem;
+	left: 22rem;
+}
+
+#subt-author {
+	position: absolute;
+	top: 11rem;
+	left: 5rem;
+}
+
+#tb-bps {
+	position: absolute;
+	top: 14.5rem;
+	left: 5rem;
+}
+
+#subt-total {
+	position: absolute;
+	top: 36rem;
+	padding-left: 5rem;
+}
+
+#subt-current {
+	position: absolute;
+	top: 11rem;
+	left: 45rem;
+}
