@@ -1,3 +1,4 @@
+// var apiRest = apiclient;
 var apiRest = apimock;
 
 var bluePrintApp = (function (){
