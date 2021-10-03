@@ -23,7 +23,7 @@ var apiclient = (function() {
 
 	return {
 		getBlueprintsByAuthor: getBlueprintsByAuthor,
-		getBlueprintsByNameAndAuthor, getBlueprintsByNameAndAuthor
+		getBlueprintsByNameAndAuthor: getBlueprintsByNameAndAuthor
 	};
-	
+
 })();
