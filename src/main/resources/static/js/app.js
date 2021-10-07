@@ -4,7 +4,13 @@ var apiRest = apimock;
 var bluePrintApp = (function (){
 	var _author;
 	var _blueprints = [];
-	
+	var _isAnyPlaneOpen = false;
+	var currentBlueprint = null;
+
+	var isAnyPlaneOpen = function() {
+		return _isAnyPlaneOpen;
+	};
+
 	var _mapBlueprints = function(blueprints) {
 		return blueprints.map(
 			function(blueprint) {
@@ -51,8 +57,9 @@ var bluePrintApp = (function (){
 	var _drawConcreteBlueprint = function(blueprint) {
 		console.log("    _drawConcreteBlueprint(): Entra.");
 		$("#subt-current").text("Current Blueprint: "+blueprint.name);
+		currentBlueprint = blueprint;
 		var points = blueprint.points;
-		var canvas = document.getElementById("cv-forBp");
+		var canvas = document.getElementById("ownCanvas");
 		var ctx = canvas.getContext("2d");
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
@@ -65,6 +72,7 @@ var bluePrintApp = (function (){
 			}
 		);
 		ctx.stroke();
+		_isAnyPlaneOpen = true;
 	};
 
 	var setAuthorName = function(author) {
@@ -82,14 +90,26 @@ var bluePrintApp = (function (){
 		apiRest.getBlueprintsByNameAndAuthor(author, bpName, _drawConcreteBlueprint);
 	};
 
-	var imprimir = function(author, bpName) {
-		console.log("  El autor del plano '"+bpName+"' es: "+author);
-	};
+	function _voidCanvas() {
+		var canvas = document.getElementById("ownCanvas");
+		var ctx = canvas.getContext("2d");
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	}
+
+	function closeCurrentBlueprint() {
+		if (_isAnyPlaneOpen) {
+			_voidCanvas();
+			$("#subt-current").text("Current Blueprint:");
+			currentBlueprint = null;
+			isAnyPlaneOpen = false;
+		}
+	}
 
 	return {
-		imprimir: imprimir,
 		setAuthorName: setAuthorName,
 		drawBlueprint: drawBlueprint,
-		generateBleuprintsList: generateBleuprintsList
+		generateBleuprintsList: generateBleuprintsList,
+		isAnyPlaneOpen: isAnyPlaneOpen,
+		closeCurrentBlueprint: closeCurrentBlueprint
 	};
 })();

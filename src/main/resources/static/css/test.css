@@ -1,0 +1,28 @@
+/* ================================ ALL ================================ */
+* {
+    font-family: arial, sans-serif;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+/* ================================ HEAD ================================ */
+
+canvas {
+	touch-action: none;
+}
+
+
+/* ================================ BODY ================================ */
+
+#ownCanvas {
+	border: 1px solid black;
+}
+
+/*#pointerzone {width:100%;max-width:300px;height:169px;border: 1px solid #ccc;margin: 0 auto;}*/
+#coords {font-size: 20px;width: 100%;}

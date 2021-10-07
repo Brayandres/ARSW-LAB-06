@@ -68,7 +68,7 @@ h2 {
 	left: 45rem;
 }
 
-#cv-forBp {
+#ownCanvas {
 	border: 1px solid #FF00A6;
 	position: absolute;
 	top: 14.5rem;
@@ -79,4 +79,10 @@ h2 {
 	position: absolute;
 	top:  5.5rem;
 	left: 22rem;
+}
+
+#top-buttons {
+	position: absolute;
+	top:  5.5rem;
+	left: 45rem;	
 }
