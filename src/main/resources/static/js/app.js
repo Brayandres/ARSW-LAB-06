@@ -1,5 +1,6 @@
 // var apiRest = apiclient;
 var apiRest = apimock;
+var drawApi = apidraw;
 
 var bluePrintApp = (function (){
 	var _author;
@@ -73,6 +74,7 @@ var bluePrintApp = (function (){
 		);
 		ctx.stroke();
 		_isAnyPlaneOpen = true;
+		notifyApiDraw(true);
 	};
 
 	var setAuthorName = function(author) {
@@ -100,9 +102,14 @@ var bluePrintApp = (function (){
 		if (_isAnyPlaneOpen) {
 			_voidCanvas();
 			$("#subt-current").text("Current Blueprint:");
+			notifyApiDraw(false);
 			currentBlueprint = null;
 			isAnyPlaneOpen = false;
 		}
+	}
+
+	function notifyApiDraw(value) {
+		drawApi.setIfisAnyPlaneOpen(value);
 	}
 
 	return {

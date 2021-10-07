@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <script src="js/apimock.js"></script>
     <script src="js/apiclient.js"></script>
+    <script src="js/apidraw.js"></script>
     <script src="js/app.js"></script>
 </head>
 
@@ -46,8 +47,11 @@
 		<button class="button" id="bt-create" type="button" onclick="">Create new blueprint</button>	
 		<button class="button" id="bt-close" type="button" onclick="bluePrintApp.closeCurrentBlueprint()">Close current blueprint</button>
 	</div>
+	<div id="div-canvas">
+		<canvas class="canvas" id="ownCanvas" width="500" height="500" onclick="apidraw.init()"></canvas>
+		<div id="coords">Make clic on Canvas!</div>
+	</div>
 	<div id="bottom-buttons">
-		<canvas class="canvas" id="ownCanvas" width="500" height="500"></canvas>
 		<button class="button" id="bt-save" type="button" onclick="">Save / Update</button>
 		<button class="button" id="bt-delete" type="button" onclick="">Delete</button>
 	</div>

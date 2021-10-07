@@ -26,6 +26,10 @@ body, html {
     font-size: 100%;
     }
 
+ canvas {
+ 	touch-action: none;
+ }
+
 /*-------------------------- Body elements --------------------------*/
 h1 {
 	position: absolute;
@@ -58,7 +62,7 @@ h2 {
 
 #subt-total {
 	position: absolute;
-	top: 44rem;
+	top: 49rem;
 	padding-left: 5rem;
 }
 
@@ -70,9 +74,11 @@ h2 {
 
 #ownCanvas {
 	border: 1px solid #FF00A6;
-	position: absolute;
-	top: 14.5rem;
-	left: 45rem;
+}
+
+#coords {
+	font-size: 1rem;
+	width: 100%;
 }
 
 #bt-get {
@@ -85,4 +91,17 @@ h2 {
 	position: absolute;
 	top:  5.5rem;
 	left: 45rem;	
+}
+
+#div-canvas {
+	text-align: center;
+	position: absolute;
+	top:  14.5rem;
+	left: 45rem;	
+}
+
+#bottom-buttons {
+	position: absolute;
+	top: 49rem;
+	left: 45rem;
 }

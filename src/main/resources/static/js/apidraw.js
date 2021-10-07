@@ -1,31 +1,22 @@
+
 var apidraw = (function() {
 
-    var lastPt = null;
+    var _isAnyPlaneOpen = false;
 
     function init() {
         var canvas = _getCanvas();
-        var liveDemoRawData = document.getElementById('liveDemoRawData');
-        liveDemoRawData.style.display='block';
-        var rawDataLink = document.getElementById('rawDataLink');
-        rawDataLink.style.display='none';
         if (window.PointerEvent) {
-            canvas.addEventListener(
-                "pointerdown",
-                function() {canvas.addEventListener("pointermove", _draw, false)},
-                false
-            );
-            canvas.addEventListener("pointerup", _endPointer, false);
+            canvas.addEventListener("pointerdown", _draw, false);
             canvas.addEventListener("pointermove", _getCoords, false);
         }
         else {
-            canvas.addEventListener(
-                "mousedown",
-                function() {canvas.addEventListener("mousemove", _draw, false)},
-                false
-            );
-            canvas.addEventListener("mouseup", _endPointer, false);
+            canvas.addEventListener("mousedown", _draw, false);
             canvas.addEventListener("mouseomove", _getCoords, false);
         }
+    }
+
+    function setIfisAnyPlaneOpen(value) {
+        _isAnyPlaneOpen = value;
     }
 
     function _getCanvas() {
@@ -34,22 +25,11 @@ var apidraw = (function() {
     }
 
     function _draw(event) {
-        var context = _getCanvas().getContext("2d");
-        var offset = _getOffset(_getCanvas());
-        if (lastPt != null) {
-            context.beginPath();
-            context.moveTo(lastPt.x-offset.left, lastPt.y-offset.top);
-            context.lineTo(event.pageX-offset.left, event.pageY-offset.top);
-            context.stroke();
+        if (_isAnyPlaneOpen) {
+            var offset = _getOffset(_getCanvas());
+            var context = _getCanvas().getContext("2d");
+            context.fillRect(event.pageX-offset.left, event.pageY-offset.top, 5, 5);
         }
-        lastPt = {x:event.pageX, y:event.pageY};
-    }
-
-    function _endPointer() {
-        var canvas = _getCanvas();
-        canvas.removeEventListener("pointermove", _draw, false);
-        canvas.removeEventListener("mousemove", _draw, false);
-        lastPt = null;
     }
 
     function _getOffset(obj) {
@@ -62,7 +42,7 @@ var apidraw = (function() {
             if (!isNaN(obj.offsetTop)) {
                 offsetTop += obj.offsetTop;
             }   
-        } while(obj = obj.offsetParent );
+        } while(obj = obj.offsetParent);
         return {left: offsetLeft, top: offsetTop};
     }
 
@@ -74,6 +54,6 @@ var apidraw = (function() {
         coords.innerHTML = "("+(event.pageX-Math.floor(_deltaX))+", "+(event.pageY-Math.floor(_deltaY))+")";
     }
 
-    return {init: init};
+    return {init: init, setIfisAnyPlaneOpen: setIfisAnyPlaneOpen};
 
 })();
