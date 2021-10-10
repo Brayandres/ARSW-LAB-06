@@ -23,7 +23,9 @@ var apidraw = (function() {
         if (bpApp.isAnyPlaneOpen()) {
             var offset = _getOffset(_getCanvas());
             var context = _getCanvas().getContext("2d");
-            context.fillRect(event.pageX-offset.left, event.pageY-offset.top, 5, 5);
+            var point = {x:event.pageX-offset.left, y:event.pageY-offset.top};
+            context.fillRect(point.x, point.y, 4, 4);
+            bpApp.drawWithNewPoint(point);
         }
     }
 

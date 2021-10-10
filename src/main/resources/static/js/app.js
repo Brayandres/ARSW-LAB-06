@@ -3,7 +3,9 @@ var apiRest = apimock;
 
 var bluePrintApp = (function (){
 	var _author;
+	var _newPoints = [];
 	var _blueprints = [];
+	var _lastDrawnPoint = null;
 	var _isAnyPlaneOpen = false;
 	var _currentBlueprint = null;
 
@@ -59,6 +61,7 @@ var bluePrintApp = (function (){
 		$("#subt-current").text("Current Blueprint: "+blueprint.name);
 		_currentBlueprint = blueprint;
 		var points = blueprint.points;
+		_lastDrawnPoint = points[points.length - 1];
 		var canvas = document.getElementById("ownCanvas");
 		var ctx = canvas.getContext("2d");
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -100,9 +103,21 @@ var bluePrintApp = (function (){
 		if (_isAnyPlaneOpen) {
 			_voidCanvas();
 			$("#subt-current").text("Current Blueprint:");
+			_newPoints = [];
+			_lastDrawnPoint = null;
 			_currentBlueprint = null;
 			_isAnyPlaneOpen = false;
 		}
+	}
+
+	function drawWithNewPoint(point) {
+		_newPoints.push(point);
+		var canvas = document.getElementById("ownCanvas");
+		var context = canvas.getContext("2d");
+		context.moveTo(_lastDrawnPoint.x, _lastDrawnPoint.y);
+		context.lineTo(point.x, point.y);
+		context.stroke();
+		_lastDrawnPoint = point;
 	}
 
 	return {
@@ -110,6 +125,7 @@ var bluePrintApp = (function (){
 		drawBlueprint: drawBlueprint,
 		generateBleuprintsList: generateBleuprintsList,
 		isAnyPlaneOpen: isAnyPlaneOpen,
-		closeCurrentBlueprint: closeCurrentBlueprint
+		closeCurrentBlueprint: closeCurrentBlueprint,
+		drawWithNewPoint: drawWithNewPoint
 	};
 })();
