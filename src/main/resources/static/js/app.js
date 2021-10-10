@@ -1,12 +1,11 @@
 // var apiRest = apiclient;
 var apiRest = apimock;
-var drawApi = apidraw;
 
 var bluePrintApp = (function (){
 	var _author;
 	var _blueprints = [];
 	var _isAnyPlaneOpen = false;
-	var currentBlueprint = null;
+	var _currentBlueprint = null;
 
 	var isAnyPlaneOpen = function() {
 		return _isAnyPlaneOpen;
@@ -58,7 +57,7 @@ var bluePrintApp = (function (){
 	var _drawConcreteBlueprint = function(blueprint) {
 		console.log("    _drawConcreteBlueprint(): Entra.");
 		$("#subt-current").text("Current Blueprint: "+blueprint.name);
-		currentBlueprint = blueprint;
+		_currentBlueprint = blueprint;
 		var points = blueprint.points;
 		var canvas = document.getElementById("ownCanvas");
 		var ctx = canvas.getContext("2d");
@@ -74,7 +73,6 @@ var bluePrintApp = (function (){
 		);
 		ctx.stroke();
 		_isAnyPlaneOpen = true;
-		notifyApiDraw(true);
 	};
 
 	var setAuthorName = function(author) {
@@ -102,14 +100,9 @@ var bluePrintApp = (function (){
 		if (_isAnyPlaneOpen) {
 			_voidCanvas();
 			$("#subt-current").text("Current Blueprint:");
-			notifyApiDraw(false);
-			currentBlueprint = null;
-			isAnyPlaneOpen = false;
+			_currentBlueprint = null;
+			_isAnyPlaneOpen = false;
 		}
-	}
-
-	function notifyApiDraw(value) {
-		drawApi.setIfisAnyPlaneOpen(value);
 	}
 
 	return {

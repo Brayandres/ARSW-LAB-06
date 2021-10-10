@@ -1,7 +1,6 @@
+var bpApp = bluePrintApp;
 
 var apidraw = (function() {
-
-    var _isAnyPlaneOpen = false;
 
     function init() {
         var canvas = _getCanvas();
@@ -15,17 +14,13 @@ var apidraw = (function() {
         }
     }
 
-    function setIfisAnyPlaneOpen(value) {
-        _isAnyPlaneOpen = value;
-    }
-
     function _getCanvas() {
         var canvas = document.getElementById("ownCanvas");
         return canvas;
     }
 
     function _draw(event) {
-        if (_isAnyPlaneOpen) {
+        if (bpApp.isAnyPlaneOpen()) {
             var offset = _getOffset(_getCanvas());
             var context = _getCanvas().getContext("2d");
             context.fillRect(event.pageX-offset.left, event.pageY-offset.top, 5, 5);
@@ -54,6 +49,6 @@ var apidraw = (function() {
         coords.innerHTML = "("+(event.pageX-Math.floor(_deltaX))+", "+(event.pageY-Math.floor(_deltaY))+")";
     }
 
-    return {init: init, setIfisAnyPlaneOpen: setIfisAnyPlaneOpen};
+    return {init: init};
 
 })();
