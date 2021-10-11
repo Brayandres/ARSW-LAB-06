@@ -1,22 +1,22 @@
 * {
     font-family: arial, sans-serif;
-    }
+}
 
 table {
     border-collapse: collapse;
     width:  100%;
-    }
+}
 
 th, td {
     text-align: center;
     border: 1px solid #000000;
-    padding: 5px;
-    }
+}
 
 th {
     font-weight: bold;
-    background-color: lightgrey;
-    }
+    background-color: lightgray;
+    /*background-color: #FA2F5A;*/
+}
 
 body, html {
     height: 100%;
@@ -24,7 +24,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-size: 100%;
-    }
+}
 
  canvas {
  	touch-action: none;
@@ -83,14 +83,32 @@ h2 {
 
 #bt-get {
 	position: absolute;
-	top:  5.5rem;
+	top:  5.4rem;
 	left: 22rem;
 }
 
-#top-buttons {
+#bt-create {
 	position: absolute;
-	top:  5.5rem;
-	left: 45rem;	
+	top: 5.4rem;
+	left: 45rem;
+}
+
+#bt-close {
+	position: absolute;
+	top: 5.4rem;
+	left: 58rem;
+}
+
+#bt-save {
+	position: absolute;
+	top: 49rem;
+	left: 45rem;
+}
+
+#bt-delete {
+	position: absolute;
+	top: 49rem;
+	left: 55rem;
 }
 
 #div-canvas {
@@ -100,8 +118,27 @@ h2 {
 	left: 45rem;	
 }
 
-#bottom-buttons {
-	position: absolute;
-	top: 49rem;
-	left: 45rem;
+.button {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+.button {
+	border: none;
+    padding: 5px 20px;
+    text-align: center;
+    /*text-transform: uppercase;*/
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+.button:hover {
+	background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.button-open {
+	border-color: black;
+	border-width: 2px;
+    border-radius: 5px;
 }

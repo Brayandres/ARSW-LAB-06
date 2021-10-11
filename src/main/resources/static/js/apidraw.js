@@ -20,7 +20,7 @@ var apidraw = (function() {
     }
 
     function _draw(event) {
-        if (bpApp.isAnyPlaneOpen()) {
+        if (bpApp.isAnyBlueprintOpen()) {
             var offset = _getOffset(_getCanvas());
             var context = _getCanvas().getContext("2d");
             var point = {x:event.pageX-offset.left, y:event.pageY-offset.top};

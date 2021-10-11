@@ -6,11 +6,11 @@ var bluePrintApp = (function (){
 	var _newPoints = [];
 	var _blueprints = [];
 	var _lastDrawnPoint = null;
-	var _isAnyPlaneOpen = false;
+	var _isAnyBlueprintOpen = false;
 	var _currentBlueprint = null;
 
-	var isAnyPlaneOpen = function() {
-		return _isAnyPlaneOpen;
+	var isAnyBlueprintOpen = function() {
+		return _isAnyBlueprintOpen;
 	};
 
 	var _mapBlueprints = function(blueprints) {
@@ -75,7 +75,7 @@ var bluePrintApp = (function (){
 			}
 		);
 		ctx.stroke();
-		_isAnyPlaneOpen = true;
+		_isAnyBlueprintOpen = true;
 	};
 
 	var setAuthorName = function(author) {
@@ -100,13 +100,13 @@ var bluePrintApp = (function (){
 	}
 
 	function closeCurrentBlueprint() {
-		if (_isAnyPlaneOpen) {
+		if (_isAnyBlueprintOpen) {
 			_voidCanvas();
 			$("#subt-current").text("Current Blueprint:");
 			_newPoints = [];
 			_lastDrawnPoint = null;
 			_currentBlueprint = null;
-			_isAnyPlaneOpen = false;
+			_isAnyBlueprintOpen = false;
 		}
 	}
 
@@ -120,12 +120,45 @@ var bluePrintApp = (function (){
 		_lastDrawnPoint = point;
 	}
 
+
+	// -------------------------------------- POST's & GET's --------------------------------------
+	function putUpdatedBluePrint() {
+		console.log("---- NEW_POINTS LEN:"+_newPoints.length);
+		let allPoints = _currentBlueprint.points.concat(_newPoints);
+		_currentBlueprint.points = allPoints;
+		var putPromise = $.ajax({
+			url: "blueprints/"+_currentBlueprint.author+"/"+_currentBlueprint.name,
+			type: "PUT",
+			data: JSON.stringify(_currentBlueprint),
+			contentType: "application/json"
+		});
+
+		putPromise.then(
+			function() {
+				generateBleuprintsList(_currentBlueprint.author);
+				_newPoints = [];
+				apiRest.getBlueprintsByNameAndAuthor(
+					_currentBlueprint.author,
+					_currentBlueprint.name,
+					function(blueprint) {
+						_currentBlueprint = blueprint;
+					}
+				);
+				alert("Your new Blueprint has been saved correctly!");
+			},
+			function() {
+				alert("Oops something has gone wrong...");
+			}
+		);
+	}
+
 	return {
 		setAuthorName: setAuthorName,
 		drawBlueprint: drawBlueprint,
 		generateBleuprintsList: generateBleuprintsList,
-		isAnyPlaneOpen: isAnyPlaneOpen,
+		isAnyBlueprintOpen: isAnyBlueprintOpen,
 		closeCurrentBlueprint: closeCurrentBlueprint,
-		drawWithNewPoint: drawWithNewPoint
+		drawWithNewPoint: drawWithNewPoint,
+		putUpdatedBluePrint: putUpdatedBluePrint
 	};
 })();
