@@ -9,6 +9,8 @@ import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
+
+import java.net.http.HttpResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +89,15 @@ public class BlueprintAPIController {
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
+    
+    @RequestMapping(path = "{author}/{name}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deletePlane (@PathVariable("author") String author, @PathVariable("name") String name) {
+    	try {
+    		bps.deleteBlueprint(author, name);
+    		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    	} catch (Exception e) {
+    		Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e);
+    		return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    	}
+    }
 }
-
